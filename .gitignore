@@ -47,6 +47,3 @@ next-env.d.ts
 
 # VS Code
 .vscode
-
-# pnpm configurations
-pnpm*
