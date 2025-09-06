@@ -29,7 +29,6 @@ export default function DatabaseClient() {
   const [crosshairs, setCrosshairs] = useState<Crosshair[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
-  const [total, setTotal] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchInput, setSearchInput] = useState(initialParams.search);
   const [activeSearchTerm, setActiveSearchTerm] = useState(initialParams.search);
@@ -78,7 +77,6 @@ export default function DatabaseClient() {
       if (data.success && data.data) {
         setCrosshairs((prev) => [...prev, ...data.data]);
         setPage((prev) => prev + 1);
-        setTotal(data.meta.total);
         // Set hasMore based on total count and current offset
         setHasMore(data.meta.total > (page + 1) * ITEMS_PER_PAGE);
       } else {
@@ -97,7 +95,6 @@ export default function DatabaseClient() {
     setCrosshairs([]);
     setPage(0);
     setHasMore(true);
-    setTotal(null);
     setLoading(true);
     updateURLParams();
   }, [activeSearchTerm, sortBy, showProOnly, updateURLParams]);

@@ -1,4 +1,3 @@
-export const runtime = "edge";
 
 import { NextRequest, NextResponse } from "next/server";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
@@ -27,7 +26,6 @@ const getQueryValidator = z.object({
 });
 
 const postMethod = z.enum(["upvoteCrosshair", "downvoteCrosshair", "copyCrosshair", "createCrosshair"]);
-type PostMethodType = z.infer<typeof postMethod>;
 
 const updateValidator = z.object({
   method: postMethod.exclude(["createCrosshair"]),

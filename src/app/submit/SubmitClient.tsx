@@ -152,7 +152,7 @@ export default function SubmitClient() {
       const text = await navigator.clipboard.readText();
       handleCodeChange(text);
       toast.success("Code pasted from clipboard");
-    } catch (error) {
+    } catch {
       toast.error("Failed to read clipboard");
     }
   };
