@@ -72,13 +72,13 @@ export default function DatabaseClient() {
       }
 
       const response = await fetch(`/api?${params}`);
-      const data: { success: boolean; data: Crosshair[]; meta: { count: number; total: number } } = await response.json();
+      const data: { success: boolean; data: Crosshair[]; meta: any } = await response.json();
 
       if (data.success && data.data) {
         setCrosshairs((prev) => [...prev, ...data.data]);
         setPage((prev) => prev + 1);
         // Set hasMore based on total count and current offset
-        setHasMore(data.meta.total > (page + 1) * ITEMS_PER_PAGE);
+        setHasMore(((data.meta.rows_read / 3) || 0) > (page + 1) * ITEMS_PER_PAGE);
       } else {
         setHasMore(false);
       }
